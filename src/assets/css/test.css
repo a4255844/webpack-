@@ -18,3 +18,15 @@ h1 {
   height: 100PX;
   margin-top: 300px;
 }
+.box2 {
+  color: burlywood;
+  width: 100px;
+  height: 100px;
+
+}
+.box3 {
+  color: #000;
+  background: pink;
+  width: 100px;
+  height: 100px;
+}

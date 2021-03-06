@@ -2,6 +2,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin') //新版需要解构赋值
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const glob = require('glob')
+const PurgeCSSPlugin = require('purgecss-webpack-plugin')
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
@@ -79,6 +81,10 @@ const config = {
     }),
     //压缩css
     new OptimizeCssAssetsWebpackPlugin(),
+    //去除无用的css代码,必须写在css单独打包后面
+    new PurgeCSSPlugin({
+      paths: glob.sync(`${resolve('src')}/**/*`, { nodir: true }),
+    }),
     // PWA项目离线加载
     new WorkboxPlugin.GenerateSW({
       // 这些选项帮助快速启用 ServiceWorkers
